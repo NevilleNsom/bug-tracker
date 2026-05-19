@@ -2,20 +2,20 @@ pipeline {
     agent any
 
     stages {
-        //stage('Running back-end unit tests') {
-            //agent {
-                //docker {
-                   // image 'snakee/golang-junit:1.21'
-                    //reuseNode true
-                //}
-           // }
-            //steps {
-               //dir('bugtracker-backend'){
-                //sh 'go test -v ./...'
-               //}
+        stage('Running back-end unit tests') {
+            agent {
+                docker {
+                    image 'snakee/golang-junit:1.21'
+                    reuseNode true
+                }
+           }
+            steps {
+               dir('bugtracker-backend'){
+                sh 'go test -v ./...'
+               }
                
-            //}
-        //}
+            }
+        }
         stage('Running front-end unit tests') {
             agent {
                 docker {
