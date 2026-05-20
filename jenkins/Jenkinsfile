@@ -2,7 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Running back-end unit tests') {
+        stage ('Running test in parrelel'){
+            parallel {
+                 stage('Running back-end unit tests') {
             agent {
                 docker {
                     image 'snakee/golang-junit:1.21'
@@ -31,7 +33,24 @@ pipeline {
                 '''
                 }
             
-            }
+               } 
+             }
+         }
+       
+            //This is to generate a report on jenkins, it is not complete 
+            //It lacks an auto generated file from local tests run
+            //post {
+                //always {
+                    //junit ''
+                //}
+            //}
+        }
+    
+    }
+
+    post {
+        always{
+            cleanWs()
         }
     }
 }
