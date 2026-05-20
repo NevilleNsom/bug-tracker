@@ -51,11 +51,53 @@ pipeline {
             }
          
          }
+         stage('Run API test'){
+            agent{
+                docker{
+                    image 'mcr.microsoft.com/playwright:v1.50.0-jammmy'
+                    reuseNode true
+                    args '-u 0 --network=host'
+                }
+            }
+            steps {
+                dir('tests-api'){
+                    sh '''
+                        npx wait-port http://localhost:8080/api/health -t 30000
+                        npm ci
+                        npx playwright test
+                    '''
+                }
+            }
+         }
+            stage('E2E Tests'){
+                agent {
+                    docker {
+                        image 'mcr.microsoft.com/playwright:v1.50.0-jammmy'
+                        reuseNode true
+                        args '-u 0 --network=host'
+                    }
+                }
+                steps {
+                    dir('tests-e2e'){
+                    sh '''
+                    npm ci
+                    npx playwright test
+                    '''
+                    }
+                    
+                }
+            }
+            
             //This is to generate a report on jenkins, it is not complete 
             //It lacks an auto generated file from local tests run
             //post {
                 //always {
-                    //junit ''
+                    //junit 'from parent to root FILE'
+                    // publishHTML target: [
+                    //     reportDir: ' from parent to root FOLDER'
+                    //     reportFiles: 'file in the root folder'
+                    //     reportName: 'name the test reports'
+                    // ]
                 //}
             //}
         }
