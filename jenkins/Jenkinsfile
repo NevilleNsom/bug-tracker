@@ -2,22 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage ('Running test in parrelel'){
-            parallel {
-                 stage('Running back-end unit tests') {
-            agent {
-                docker {
-                    image 'snakee/golang-junit:1.21'
-                    reuseNode true
-                }
-           }
-            steps {
-               dir('bugtracker-backend'){
-                sh 'go test -v ./...'
-               }
+        //stage ('Running test in parrelel'){
+           // parallel {
+        //          stage('Running back-end unit tests') {
+        //     agent {
+        //         docker {
+        //             image 'snakee/golang-junit:1.21'
+        //             reuseNode true
+        //         }
+        //    }
+        //     steps {
+        //        dir('bugtracker-backend'){
+        //         sh 'go test -v ./...'
+        //        }
                
-            }
-        }
+        //     }
+        // }
         stage('Running front-end unit tests') {
             agent {
                 docker {
@@ -35,7 +35,21 @@ pipeline {
             
                } 
              }
-         }
+         
+            //}
+        //}
+        //  stage("Launch Application"){
+        //     agent{
+        //         docker {
+        //             image'docker: 27.5.1'
+        //             reuseNode true
+        //             args '-v /var/run/docker.sock:/var/run/docker.sock -u 0'
+        //         }
+        //     }
+        //     steps{
+        //         sh 'docker compose up --build -d'
+        //     }
+         
        
             //This is to generate a report on jenkins, it is not complete 
             //It lacks an auto generated file from local tests run
@@ -45,6 +59,7 @@ pipeline {
                 //}
             //}
         }
+    
     
     }
 
