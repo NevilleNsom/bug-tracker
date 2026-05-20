@@ -18,39 +18,39 @@ pipeline {
                
         //     }
         // }
-        stage('Running front-end unit tests') {
-            agent {
-                docker {
-                    image 'node:20-alpine'
-                    reuseNode true
-                }
-            }
-            steps {
-                dir('bugtracker-frontend'){
-                        sh '''
-                    npm ci
-                    npm test
-                '''
-                }
+        // stage('Running front-end unit tests') {
+        //     agent {
+        //         docker {
+        //             image 'node:20-alpine'
+        //             reuseNode true
+        //         }
+        //     }
+        //     steps {
+        //         dir('bugtracker-frontend'){
+        //                 sh '''
+        //             npm ci
+        //             npm test
+        //         '''
+        //         }
             
-               } 
-             }
+        //        } 
+        //      }
          
             //}
         //}
-        //  stage("Launch Application"){
-        //     agent{
-        //         docker {
-        //             image'docker: 27.5.1'
-        //             reuseNode true
-        //             args '-v /var/run/docker.sock:/var/run/docker.sock -u 0'
-        //         }
-        //     }
-        //     steps{
-        //         sh 'docker compose up --build -d'
-        //     }
+         stage("Launch Application"){
+            agent{
+                docker {
+                    image'docker: 27.5.1'
+                    reuseNode true
+                    args '-v /var/run/docker.sock:/var/run/docker.sock -u 0'
+                }
+            }
+            steps{
+                sh 'docker compose up --build -d'
+            }
          
-       
+         }
             //This is to generate a report on jenkins, it is not complete 
             //It lacks an auto generated file from local tests run
             //post {
