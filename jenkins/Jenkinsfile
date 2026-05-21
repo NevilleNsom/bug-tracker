@@ -2,22 +2,28 @@ pipeline {
     agent any
 
     stages {
-        //stage ('Running test in parrelel'){
-           // parallel {
-        //          stage('Running back-end unit tests') {
-        //     agent {
-        //         docker {
-        //             image 'snakee/golang-junit:1.21'
-        //             reuseNode true
-        //         }
-        //    }
-        //     steps {
-        //        dir('bugtracker-backend'){
-        //         sh 'go test -v ./...'
-        //        }
+        // stage ('Running test in parrelel'){
+        //    parallel {
+                 stage('Running back-end unit tests') {
+            agent {
+                docker {
+                    image 'snakee/golang-junit:1.21'
+                    reuseNode true
+                }
+           }
+            steps {
+               dir('bugtracker-backend'){
+                sh 'go test ./... -v  2>&1 | go-junit-report > tests-results.xml'
+               }
                
-        //     }
-        // }
+            }
+            post {
+                always{
+                    junit 'bugtracker-backend/tests-results.xml'
+                }
+            }
+        }
+           
         // stage('Running front-end unit tests') {
         //     agent {
         //         docker {
@@ -101,10 +107,22 @@ pipeline {
                         sh 'k6 run script.js'
                     }
                 }
+                // this post report only contains an html generated report
+                // no report junit available here
+                post {
+                    always {
+                        publishHTML target: [
+                        reportDir: 'tests-perf'
+                        reportFiles: ''
+                        reportName: 'Performance test report'
+                        ]
+                    }
+                }
             }
 
-            //This is to generate a report on jenkins, it is not complete 
+            //This is to generate a report on jenkins for frontend tests, it is not complete 
             //It lacks an auto generated file from local tests run
+            // it comes after every step in a stage as seen above in perf
             //post {
                 //always {
                     //junit 'from parent to root FILE'
