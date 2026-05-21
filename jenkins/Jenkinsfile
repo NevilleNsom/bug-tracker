@@ -132,12 +132,14 @@ pipeline {
                 }
             }
 
-            //This is to generate a report on jenkins for frontend tests, it is not complete 
-            //It lacks an auto generated file from local tests run
+            //This is to generate reports on jenkins, it is not complete 
+            //It requires an auto generated file from local tests run
             // it comes after every step in a stage as seen above in perf
             //post {
                 //always {
+                // this is to publish .xml auto generated reports
                     //junit 'from parent to root FILE'
+                    //this is to publish html reports
                     // publishHTML target: [
                     //     reportDir: ' from parent to root FOLDER',
                     //     reportFiles: 'file in the root folder',
