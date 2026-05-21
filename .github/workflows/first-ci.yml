@@ -1,15 +1,14 @@
-name: first-CI
+name: CI
 
 on: 
 
     push:
-    branches: 
-      - main
+      branches: 
+        - main
 
     workflow_dispatch:
 
     jobs:
-
       backend-unit-tests:
 
       runs on: ubuntu-latest
