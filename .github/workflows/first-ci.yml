@@ -25,4 +25,27 @@ jobs:
         working-directory: ./bugtracker-backend
         run: |
           go test -v ./...
+
+  frontend-unit-tests:
+    needs: backend-unit-tests
+    runs-on: ubuntu-latest
+
+    steps: 
+
+      - uses: actions/checkout@v4
+
+      - name: set up Node.js
+        uses: actions/setup-node@v4
+        with: 
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: bugtracker-frontend/package-lock.json
+
+      - name: Execute front end unit tests
+        working-directory: ./bugtracker-frontend
+        run: |
+          npm ci
+          npm test
+
+
   
