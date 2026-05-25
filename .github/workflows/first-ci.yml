@@ -49,13 +49,13 @@ jobs:
 
           go test -v ./...  2>&1 | go-junit-report > tests-results.xml
 
-      - name: Publish backend test results
-        uses: dorny/test-reporter@v1
-        if: always()
-        with:
-         name: Backend unit test reports
-         path: bugtracker-backend/tests-results.xml
-         reporter: jest-junit
+      # - name: Publish backend test results
+      #   uses: dorny/test-reporter@v1
+      #   if: always()
+      #   with:
+      #    name: Backend unit test reports
+      #    path: bugtracker-backend/tests-results.xml
+      #    reporter: jest-junit
 
   frontend-unit-tests:
     # needs: backend-unit-tests
@@ -85,13 +85,13 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
 
 
-      - name: Publish Frontend Test Results
-        uses: dorny/test-reporter@v1
-        if: always()
-        with: 
-          name: Front end unit test report
-          path: bugtracker-frontend/test-results.xml
-          reporter: jest-junit
+      # - name: Publish Frontend Test Results
+      #   uses: dorny/test-reporter@v1
+      #   if: always()
+      #   with: 
+      #     name: Front end unit test report
+      #     path: bugtracker-frontend/test-results.xml
+      #     reporter: jest-junit
   create-coverage-comment: 
     if: github.event_name == 'pull_request'
     needs: [backend-unit-tests]
