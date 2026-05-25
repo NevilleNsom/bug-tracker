@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites tests="63">
-	<testsuite name="bugtracker-backend/cmd/bugtracker" tests="7" failures="0" errors="0" id="0" hostname="DESKTOP-NEVILLE" time="0.250" timestamp="2026-05-21T14:55:33+01:00">
+	<testsuite name="bugtracker-backend/cmd/bugtracker" tests="7" failures="0" errors="0" id="0" hostname="DESKTOP-NEVILLE" time="0.250" timestamp="2026-05-25T20:27:04+01:00">
 		<testcase name="TestServerInitialization" classname="bugtracker-backend/cmd/bugtracker" time="0.140">
 			<system-out><![CDATA[[cors] 2026/05/21 14:47:17 Handler: Preflight request
 [cors] 2026/05/21 14:47:17   Preflight response headers: map[Access-Control-Allow-Credentials:[true] Access-Control-Allow-Methods:[GET] Access-Control-Allow-Origin:[http://localhost:3000] Access-Control-Max-Age:[300] Vary:[Origin, Access-Control-Request-Method, Access-Control-Request-Headers]]]]></system-out>
@@ -63,106 +63,106 @@
     main_test.go:189: Access-Control-Allow-Headers: ]]></system-out>
 		</testcase>
 	</testsuite>
-	<testsuite name="bugtracker-backend/internal/config" tests="0" failures="0" errors="0" id="1" hostname="DESKTOP-NEVILLE" time="0.000" timestamp="2026-05-21T14:55:33+01:00"></testsuite>
-	<testsuite name="bugtracker-backend/internal/db" tests="12" failures="0" errors="0" id="2" hostname="DESKTOP-NEVILLE" time="0.390" timestamp="2026-05-21T14:55:33+01:00">
-		<testcase name="TestCreateComment" classname="bugtracker-backend/internal/db" time="0.130">
-			<system-out><![CDATA[2026/05/21 14:47:17 Database initialized successfully.]]></system-out>
+	<testsuite name="bugtracker-backend/internal/config" tests="0" failures="0" errors="0" id="1" hostname="DESKTOP-NEVILLE" time="0.000" timestamp="2026-05-25T20:27:04+01:00"></testsuite>
+	<testsuite name="bugtracker-backend/internal/db" tests="12" failures="0" errors="0" id="2" hostname="DESKTOP-NEVILLE" time="0.199" timestamp="2026-05-25T20:27:05+01:00">
+		<testcase name="TestCreateComment" classname="bugtracker-backend/internal/db" time="0.030">
+			<system-out><![CDATA[2026/05/25 20:27:05 Database initialized successfully.]]></system-out>
 		</testcase>
-		<testcase name="TestCreateComment/Valid_comment_creation" classname="bugtracker-backend/internal/db" time="0.040"></testcase>
+		<testcase name="TestCreateComment/Valid_comment_creation" classname="bugtracker-backend/internal/db" time="0.010"></testcase>
 		<testcase name="TestCreateComment/Invalid_bug_ID" classname="bugtracker-backend/internal/db" time="0.000"></testcase>
 		<testcase name="TestCreateComment/Invalid_bug_ID_format" classname="bugtracker-backend/internal/db" time="0.000"></testcase>
-		<testcase name="TestGetComments" classname="bugtracker-backend/internal/db" time="0.090">
-			<system-out><![CDATA[2026/05/21 14:47:17 Database initialized successfully.]]></system-out>
+		<testcase name="TestGetComments" classname="bugtracker-backend/internal/db" time="0.050">
+			<system-out><![CDATA[2026/05/25 20:27:05 Database initialized successfully.]]></system-out>
 		</testcase>
 		<testcase name="TestGetComments/Get_existing_comments" classname="bugtracker-backend/internal/db" time="0.000"></testcase>
 		<testcase name="TestGetComments/Get_comments_for_non-existent_bug" classname="bugtracker-backend/internal/db" time="0.000"></testcase>
-		<testcase name="TestDatabaseInitialization" classname="bugtracker-backend/internal/db" time="0.040">
-			<system-out><![CDATA[2026/05/21 14:47:17 Database initialized successfully.]]></system-out>
+		<testcase name="TestDatabaseInitialization" classname="bugtracker-backend/internal/db" time="0.030">
+			<system-out><![CDATA[2026/05/25 20:27:05 Database initialized successfully.]]></system-out>
 		</testcase>
-		<testcase name="TestMultipleInitializations" classname="bugtracker-backend/internal/db" time="0.040">
-			<system-out><![CDATA[2026/05/21 14:47:17 Database initialized successfully.
-2026/05/21 14:47:17 Database initialized successfully.]]></system-out>
+		<testcase name="TestMultipleInitializations" classname="bugtracker-backend/internal/db" time="0.030">
+			<system-out><![CDATA[2026/05/25 20:27:05 Database initialized successfully.
+2026/05/25 20:27:05 Database initialized successfully.]]></system-out>
 		</testcase>
 		<testcase name="TestCleanup" classname="bugtracker-backend/internal/db" time="0.020">
-			<system-out><![CDATA[2026/05/21 14:47:17 Database initialized successfully.]]></system-out>
+			<system-out><![CDATA[2026/05/25 20:27:05 Database initialized successfully.]]></system-out>
 		</testcase>
 		<testcase name="TestInitWithInvalidPath" classname="bugtracker-backend/internal/db" time="0.000"></testcase>
-		<testcase name="TestConcurrentInitializations" classname="bugtracker-backend/internal/db" time="0.030">
-			<system-out><![CDATA[2026/05/21 14:47:17 Database initialized successfully.]]></system-out>
+		<testcase name="TestConcurrentInitializations" classname="bugtracker-backend/internal/db" time="0.020">
+			<system-out><![CDATA[2026/05/25 20:27:05 Database initialized successfully.]]></system-out>
 		</testcase>
 	</testsuite>
-	<testsuite name="bugtracker-backend/internal/handlers" tests="27" failures="0" errors="0" id="3" hostname="DESKTOP-NEVILLE" time="0.420" timestamp="2026-05-21T14:55:33+01:00">
-		<testcase name="TestCreateBug" classname="bugtracker-backend/internal/handlers" time="0.090">
-			<system-out><![CDATA[2026/05/21 14:47:17 Database initialized successfully.]]></system-out>
+	<testsuite name="bugtracker-backend/internal/handlers" tests="27" failures="0" errors="0" id="3" hostname="DESKTOP-NEVILLE" time="0.224" timestamp="2026-05-25T20:27:05+01:00">
+		<testcase name="TestCreateBug" classname="bugtracker-backend/internal/handlers" time="0.030">
+			<system-out><![CDATA[2026/05/25 20:27:05 Database initialized successfully.]]></system-out>
 		</testcase>
 		<testcase name="TestCreateBug/Valid_bug_creation" classname="bugtracker-backend/internal/handlers" time="0.010">
-			<system-out><![CDATA[2026/05/21 14:47:17 CreateBug called from 192.0.2.1:1234
-2026/05/21 14:47:17 Request headers: map[]
-2026/05/21 14:47:17 Request method: POST]]></system-out>
+			<system-out><![CDATA[2026/05/25 20:27:05 CreateBug called from 192.0.2.1:1234
+2026/05/25 20:27:05 Request headers: map[]
+2026/05/25 20:27:05 Request method: POST]]></system-out>
 		</testcase>
 		<testcase name="TestCreateBug/Invalid_bug_-_missing_title" classname="bugtracker-backend/internal/handlers" time="0.000">
-			<system-out><![CDATA[2026/05/21 14:47:17 CreateBug called from 192.0.2.1:1234
-2026/05/21 14:47:17 Request headers: map[]
-2026/05/21 14:47:17 Request method: POST]]></system-out>
+			<system-out><![CDATA[2026/05/25 20:27:05 CreateBug called from 192.0.2.1:1234
+2026/05/25 20:27:05 Request headers: map[]
+2026/05/25 20:27:05 Request method: POST]]></system-out>
 		</testcase>
 		<testcase name="TestCreateBug/Invalid_JSON" classname="bugtracker-backend/internal/handlers" time="0.000">
-			<system-out><![CDATA[2026/05/21 14:47:17 CreateBug called from 192.0.2.1:1234
-2026/05/21 14:47:17 Request headers: map[]
-2026/05/21 14:47:17 Request method: POST
-2026/05/21 14:47:17 Failed to decode create bug request: invalid character 'j' looking for beginning of value]]></system-out>
+			<system-out><![CDATA[2026/05/25 20:27:05 CreateBug called from 192.0.2.1:1234
+2026/05/25 20:27:05 Request headers: map[]
+2026/05/25 20:27:05 Request method: POST
+2026/05/25 20:27:05 Failed to decode create bug request: invalid character 'j' looking for beginning of value]]></system-out>
 		</testcase>
-		<testcase name="TestGetBug" classname="bugtracker-backend/internal/handlers" time="0.070">
-			<system-out><![CDATA[2026/05/21 14:47:17 Database initialized successfully.]]></system-out>
+		<testcase name="TestGetBug" classname="bugtracker-backend/internal/handlers" time="0.030">
+			<system-out><![CDATA[2026/05/25 20:27:05 Database initialized successfully.]]></system-out>
 		</testcase>
 		<testcase name="TestGetBug/Valid_bug_retrieval" classname="bugtracker-backend/internal/handlers" time="0.000"></testcase>
 		<testcase name="TestGetBug/Non-existent_bug" classname="bugtracker-backend/internal/handlers" time="0.000"></testcase>
 		<testcase name="TestGetBug/Invalid_bug_ID" classname="bugtracker-backend/internal/handlers" time="0.000"></testcase>
-		<testcase name="TestUpdateBug" classname="bugtracker-backend/internal/handlers" time="0.080">
-			<system-out><![CDATA[2026/05/21 14:47:17 Database initialized successfully.]]></system-out>
+		<testcase name="TestUpdateBug" classname="bugtracker-backend/internal/handlers" time="0.040">
+			<system-out><![CDATA[2026/05/25 20:27:05 Database initialized successfully.]]></system-out>
 		</testcase>
 		<testcase name="TestUpdateBug/Valid_bug_update" classname="bugtracker-backend/internal/handlers" time="0.010"></testcase>
 		<testcase name="TestUpdateBug/Non-existent_bug" classname="bugtracker-backend/internal/handlers" time="0.000"></testcase>
 		<testcase name="TestUpdateBug/Invalid_bug_ID" classname="bugtracker-backend/internal/handlers" time="0.000"></testcase>
 		<testcase name="TestUpdateBug/Invalid_JSON" classname="bugtracker-backend/internal/handlers" time="0.000"></testcase>
-		<testcase name="TestDeleteBug" classname="bugtracker-backend/internal/handlers" time="0.050">
-			<system-out><![CDATA[2026/05/21 14:47:17 Database initialized successfully.]]></system-out>
+		<testcase name="TestDeleteBug" classname="bugtracker-backend/internal/handlers" time="0.040">
+			<system-out><![CDATA[2026/05/25 20:27:05 Database initialized successfully.]]></system-out>
 		</testcase>
 		<testcase name="TestDeleteBug/Valid_bug_deletion" classname="bugtracker-backend/internal/handlers" time="0.010"></testcase>
 		<testcase name="TestDeleteBug/Non-existent_bug" classname="bugtracker-backend/internal/handlers" time="0.000"></testcase>
 		<testcase name="TestDeleteBug/Invalid_bug_ID" classname="bugtracker-backend/internal/handlers" time="0.000"></testcase>
 		<testcase name="TestCreateComment" classname="bugtracker-backend/internal/handlers" time="0.040">
-			<system-out><![CDATA[2026/05/21 14:47:17 Database initialized successfully.]]></system-out>
+			<system-out><![CDATA[2026/05/25 20:27:05 Database initialized successfully.]]></system-out>
 		</testcase>
 		<testcase name="TestCreateComment/Valid_comment_creation" classname="bugtracker-backend/internal/handlers" time="0.010">
-			<system-out><![CDATA[2026/05/21 14:47:17 Creating comment for bug 1]]></system-out>
+			<system-out><![CDATA[2026/05/25 20:27:05 Creating comment for bug 1]]></system-out>
 		</testcase>
 		<testcase name="TestCreateComment/Invalid_bug_ID" classname="bugtracker-backend/internal/handlers" time="0.000">
-			<system-out><![CDATA[2026/05/21 14:47:17 Creating comment for bug 999]]></system-out>
+			<system-out><![CDATA[2026/05/25 20:27:05 Creating comment for bug 999]]></system-out>
 		</testcase>
 		<testcase name="TestCreateComment/Missing_content" classname="bugtracker-backend/internal/handlers" time="0.000">
-			<system-out><![CDATA[2026/05/21 14:47:17 Creating comment for bug 1]]></system-out>
+			<system-out><![CDATA[2026/05/25 20:27:05 Creating comment for bug 1]]></system-out>
 		</testcase>
 		<testcase name="TestCreateComment/Invalid_JSON" classname="bugtracker-backend/internal/handlers" time="0.000">
-			<system-out><![CDATA[2026/05/21 14:47:17 Creating comment for bug 1]]></system-out>
+			<system-out><![CDATA[2026/05/25 20:27:05 Creating comment for bug 1]]></system-out>
 		</testcase>
-		<testcase name="TestGetComments" classname="bugtracker-backend/internal/handlers" time="0.050">
-			<system-out><![CDATA[2026/05/21 14:47:17 Database initialized successfully.]]></system-out>
+		<testcase name="TestGetComments" classname="bugtracker-backend/internal/handlers" time="0.040">
+			<system-out><![CDATA[2026/05/25 20:27:05 Database initialized successfully.]]></system-out>
 		</testcase>
 		<testcase name="TestGetComments/Get_existing_comments" classname="bugtracker-backend/internal/handlers" time="0.000">
-			<system-out><![CDATA[2026/05/21 14:47:17 Getting comments for bug 1]]></system-out>
+			<system-out><![CDATA[2026/05/25 20:27:05 Getting comments for bug 1]]></system-out>
 		</testcase>
 		<testcase name="TestGetComments/Get_comments_for_non-existent_bug" classname="bugtracker-backend/internal/handlers" time="0.000">
-			<system-out><![CDATA[2026/05/21 14:47:17 Getting comments for bug 999]]></system-out>
+			<system-out><![CDATA[2026/05/25 20:27:05 Getting comments for bug 999]]></system-out>
 		</testcase>
 		<testcase name="TestGetComments/Invalid_bug_ID" classname="bugtracker-backend/internal/handlers" time="0.000">
-			<system-out><![CDATA[2026/05/21 14:47:17 Getting comments for bug invalid]]></system-out>
+			<system-out><![CDATA[2026/05/25 20:27:05 Getting comments for bug invalid]]></system-out>
 		</testcase>
 		<testcase name="TestHealthCheck" classname="bugtracker-backend/internal/handlers" time="0.000">
-			<system-out><![CDATA[2026/05/21 14:47:17 Health check request received from 
-2026/05/21 14:47:17 Sending health check response]]></system-out>
+			<system-out><![CDATA[2026/05/25 20:27:05 Health check request received from 
+2026/05/25 20:27:05 Sending health check response]]></system-out>
 		</testcase>
 	</testsuite>
-	<testsuite name="bugtracker-backend/internal/models" tests="17" failures="0" errors="0" id="4" hostname="DESKTOP-NEVILLE" time="0.000" timestamp="2026-05-21T14:55:33+01:00">
+	<testsuite name="bugtracker-backend/internal/models" tests="17" failures="0" errors="0" id="4" hostname="DESKTOP-NEVILLE" time="0.000" timestamp="2026-05-25T20:27:05+01:00">
 		<testcase name="TestBugValidation" classname="bugtracker-backend/internal/models" time="0.000"></testcase>
 		<testcase name="TestBugValidation/Valid_bug" classname="bugtracker-backend/internal/models" time="0.000"></testcase>
 		<testcase name="TestBugValidation/Missing_title" classname="bugtracker-backend/internal/models" time="0.000"></testcase>
@@ -181,5 +181,5 @@
 		<testcase name="TestCreateCommentRequest/Missing_author" classname="bugtracker-backend/internal/models" time="0.000"></testcase>
 		<testcase name="TestCreateCommentRequest/Missing_content" classname="bugtracker-backend/internal/models" time="0.000"></testcase>
 	</testsuite>
-	<testsuite name="bugtracker-backend/internal/testutil" tests="0" failures="0" errors="0" id="5" hostname="DESKTOP-NEVILLE" time="0.000" timestamp="2026-05-21T14:55:33+01:00"></testsuite>
+	<testsuite name="bugtracker-backend/internal/testutil" tests="0" failures="0" errors="0" id="5" hostname="DESKTOP-NEVILLE" time="0.000" timestamp="2026-05-25T20:27:05+01:00"></testsuite>
 </testsuites>
