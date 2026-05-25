@@ -51,7 +51,7 @@ jobs:
 
       # - name: Publish backend test results
       #   uses: dorny/test-reporter@v1
-      #   if: always()
+        # if: always()
       #   with:
       #    name: Backend unit test reports
       #    path: bugtracker-backend/tests-results.xml
