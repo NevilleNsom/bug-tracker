@@ -1,6 +1,7 @@
 {
   "devDependencies": {
-    "jest": "^30.4.2"
+    "jest": "^29.7.0",
+    "ts-jest": "^29.4.11"
   },
   "name": "bug-tracker",
   "version": "1.0.0",
@@ -191,7 +192,6 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-    
   },
   "repository": {
     "type": "git",
