@@ -35,27 +35,27 @@ jobs:
         working-directory: ./bugtracker-backend
         run: |
 
-          # go test -json -coverprofile=coverage.out -covermode=atomic ./...
-          # go tool cover -func=coverage.out > coverage.txt
+          go test -json -coverprofile=coverage.out -covermode=atomic ./...
+          go tool cover -func=coverage.out > coverage.txt
 
-          # echo"## Go Test Backend Coverage Report" >> $GITHUB_STEP_SUMMARY
-          # echo '```' >> $GITHUB_STEP_SUMMARY
-          # cat coverage.txt >> $GITHUB_STEP_SUMMARY
-          # echo '```' >> $GITHUB_STEP_SUMMARY
+          echo"## Go Test Backend Coverage Report" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat coverage.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
 
-          # echo "report<<EOF" >> $GITHUB_OUTPUT
-          # cat coverage.txt >> 
-          # echo "EOF" >> $GITHUB_OUTPUT
+          echo "report<<EOF" >> $GITHUB_OUTPUT
+          cat coverage.txt >> 
+          echo "EOF" >> $GITHUB_OUTPUT
 
-          # go test -v ./...  2>&1 | go-junit-report > tests-results.xml
+          go test -v ./...  2>&1 | go-junit-report > tests-results.xml
 
-      # - name: Publish backend test results
-      #   uses: dorny/test-reporter@v1
-        # if: always()
-      #   with:
-      #    name: Backend unit test reports
-      #    path: bugtracker-backend/tests-results.xml
-      #    reporter: jest-junit
+      - name: Publish backend test results
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+         name: Backend unit test reports
+         path: bugtracker-backend/tests-results.xml
+         reporter: jest-junit
 
   frontend-unit-tests:
     # needs: backend-unit-tests
@@ -82,49 +82,49 @@ jobs:
           npm ci
           npm test | tee full_output.txt
 
-  #         echo"## Frontend Coverage Report" >> $GITHUB_STEP_SUMMARY
-  #         echo '```' >> $GITHUB_STEP_SUMMARY
-  #         cat full_output.txt >> $GITHUB_STEP_SUMMARY
-  #         echo '```' >> $GITHUB_STEP_SUMMARY
+          echo"## Frontend Coverage Report" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat full_output.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
 
-  #         echo "report<<EOF" >> $GITHUB_OUTPUT
-  #         cat full_output.txt >> 
-  #         echo "EOF" >> $GITHUB_OUTPUT
+          echo "report<<EOF" >> $GITHUB_OUTPUT
+          cat full_output.txt >> 
+          echo "EOF" >> $GITHUB_OUTPUT
 
 
-      # - name: Publish Frontend Test Results
-      #   uses: dorny/test-reporter@v1
-      #   if: always()
-      #   with: 
-      #     name: Front end unit test report
-      #     path: bugtracker-frontend/test-results.xml
-      #     reporter: jest-junit
-  # create-coverage-comment: 
-  #   if: github.event_name == 'pull_request'
-  #   needs: [backend-unit-tests , frontend-unit-tests]
-  #   runs-on: ubuntu-latest
-  #   permissions: 
-  #     pull-requests: write
-  #   steps: 
-  #     - name: Backend coverage report
-  #       uses: peter-evans/create-or-update-comment@v4
-  #       with: 
-  #         issue-number: ${{github.event.pull_request.number}}
-  #         body: |
-  #          ## backend test coverage report comments
-  #          ```
-  #          ${{needs.backend-unit-tests.outputs.coverage}}
-  #          ```
+      - name: Publish Frontend Test Results
+        uses: dorny/test-reporter@v1
+        if: always()
+        with: 
+          name: Front end unit test report
+          path: bugtracker-frontend/test-results.xml
+          reporter: jest-junit
+  create-coverage-comment: 
+    if: github.event_name == 'pull_request'
+    needs: [backend-unit-tests , frontend-unit-tests]
+    runs-on: ubuntu-latest
+    permissions: 
+      pull-requests: write
+    steps: 
+      - name: Backend coverage report
+        uses: peter-evans/create-or-update-comment@v4
+        with: 
+          issue-number: ${{github.event.pull_request.number}}
+          body: |
+           ## backend test coverage report comments
+           ```
+           ${{needs.backend-unit-tests.outputs.coverage}}
+           ```
 
-  #     - name: Frontend coverage report
-  #       uses: peter-evans/create-or-update-comment@v4
-  #       with: 
-  #         issue-number: ${{github.event.pull_request.number}}
-  #         body: |
-  #          ## frontend test coverage comments
-  #          ```
-  #          ${{needs.frontend-unit-tests.outputs.coverage}}
-  #          ```
+      - name: Frontend coverage report
+        uses: peter-evans/create-or-update-comment@v4
+        with: 
+          issue-number: ${{github.event.pull_request.number}}
+          body: |
+           ## frontend test coverage comments
+           ```
+           ${{needs.frontend-unit-tests.outputs.coverage}}
+           ```
 
   
   run-api-tests:
