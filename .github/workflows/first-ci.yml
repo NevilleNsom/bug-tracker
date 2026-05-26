@@ -99,7 +99,7 @@ jobs:
       #     name: Front end unit test report
       #     path: bugtracker-frontend/test-results.xml
       #     reporter: jest-junit
-      
+
   create-coverage-comment: 
     if: github.event_name == 'pull_request'
     needs: [backend-unit-tests , frontend-unit-tests]
@@ -137,6 +137,6 @@ jobs:
 
       - name: Launch application
         run:   |
-         docker compose up -d
+         docker compose up --build -d
          npx wait-port http://localhost:8080/api/health -t 30000
       
