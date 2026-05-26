@@ -4,6 +4,9 @@ on:
   push:
     branches: 
       - main
+  pull_request:
+    branches:
+      - main
 
   workflow_dispatch:
 
@@ -11,7 +14,8 @@ jobs:
   backend-unit-tests:
 
     runs-on: ubuntu-latest
-    
+    outputs: 
+      coverage: ${{steps.test-backend.outputs.report}}
     steps:
 
       - uses: actions/checkout@v4
@@ -27,6 +31,7 @@ jobs:
 
 
       - name: Execute backend unit tests
+        id: test-backend
         working-directory: ./bugtracker-backend
         run: |
 
@@ -37,6 +42,10 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
           cat coverage.txt >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
+
+          echo "report<<EOF" >> $GITHUB_OUTPUT
+          cat coverage.txt >> 
+          echo "EOF" >> $GITHUB_OUTPUT
 
           go test -v ./...  2>&1 | go-junit-report > tests-results.xml
 
@@ -49,7 +58,7 @@ jobs:
          reporter: jest-junit
 
   frontend-unit-tests:
-    needs: backend-unit-tests
+    # needs: backend-unit-tests
     runs-on: ubuntu-latest
     # env: 
     #   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -83,6 +92,21 @@ jobs:
           name: Front end unit test report
           path: bugtracker-frontend/test-results.xml
           reporter: jest-junit
-
+  create-coverage-comment: 
+    if: github.event_name == 'pull_request'
+    needs: [backend-unit-tests]
+    runs-on: ubuntu-latest
+    permissions: 
+      pull-requests: write
+    steps: 
+      - name: Create backend coverage comment
+        uses: peter-evans/create-or-update-comment@v4
+        with: 
+          issue-number: ${{github.event.pull_request.number}}
+          body: |
+           ## backend test coverage report
+           ```
+           ${{needs.backend-unit-tests.outputs.coverage}}
+           ```
 
   
