@@ -127,7 +127,7 @@ jobs:
            ```
 
 
-  run-api-tests:
+  run-api-and-e2e-tests:
     needs: [frontend-unit-tests, backend-unit-tests] 
     runs-on: ubuntu latest
 
@@ -146,10 +146,20 @@ jobs:
           npm ci
           npx playwright test
 
+      - name: Run e2e tests
+        working-directory: ./tests-e2e
+        env:
+          CI: '1'   #this innitialises ci to 1, ci is required to run test in a headless manner, 
+                    #see playwright.config
+        run:  |
+          npm ci
+          npx playwright install
+          npx playwright test
+
       - name: Shut down application
         run: docker compose down
 
-      - name: Upload Test results
+      - name: Upload API Test results
         if: always()
         uses: actions/upload-artifact@v4
         with: 
@@ -157,7 +167,7 @@ jobs:
           path: ./tests-api/test-results/
           retention-days: 30 #how long it will be available for download on github
 
-      - name: Upload Playwright Test report
+      - name: Upload API Playwright Test report
         if: always()
         uses: actions/upload-artifact@v4
         with: 
@@ -165,12 +175,37 @@ jobs:
           path: ./tests-api/playwright-report/
           retention-days: 30
 
+      - name: Upload E2E test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with: 
+          name: E2E test report
+          path: ./tests-e2e/tests-results/
+          retention-days: 30
+
+      - name: Upload E2E playwright test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: E2E playwright test results
+          path: ./tests-e2e/playwright-report/
+          retention-days: 30
+
+
       - name: Publish Playwright Test report
         if: always()
         uses: dorny/test-reporter@v1
         with: 
           name: API test report
           path: ./tests-api/playwright-report/*.xml
+          reporter: jest-junit
+
+      - name: Publish E2E test report
+        if: always()
+        uses: dorny/test-reporter@v1
+        with:
+          name: e2e-test-report
+          path: ./tests-e2e/test-results/*.xml
           reporter: jest-junit
           
 
