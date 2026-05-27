@@ -139,4 +139,41 @@ jobs:
         run:   |
          docker compose up --build -d
          npx wait-port http://localhost:8080/api/health -t 30000
+
+      - name: Run API tests
+        working-directory: ./tests-api
+        run:   |
+          npm ci
+          npx playwright test
+
+      - name: Shut down application
+        run: docker compose down
+
+      - name: Upload Test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with: 
+          name: api tests results
+          path: ./tests-api/test-results/
+          retention-days: 30 #how long it will be available for download on github
+
+      - name: Upload Playwright Test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with: 
+          name: api playwright tests results
+          path: ./tests-api/playwright-report/
+          retention-days: 30
+
+      - name: Publish Playwright Test report
+        if: always()
+        uses: dorny/test-reporter@v1
+        with: 
+          name: API test report
+          path: ./tests-api/playwright-report/*.xml
+          reporter: jest-junit
+          
+
+
+
       
