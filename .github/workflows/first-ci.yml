@@ -51,7 +51,7 @@ jobs:
 
       # - name: Publish backend test results
       #   uses: dorny/test-reporter@v1
-      #   if: always()
+      #   if:always()
       #   with:
       #    name: Backend unit test reports
       #    path: bugtracker-backend/tests-results.xml
@@ -82,19 +82,20 @@ jobs:
           npm ci
           npm test | tee full_output.txt
 
-          # echo"## Frontend Coverage Report" >> $GITHUB_STEP_SUMMARY
-          # echo '```' >> $GITHUB_STEP_SUMMARY
-          # cat full_output.txt >> $GITHUB_STEP_SUMMARY
-          # echo '```' >> $GITHUB_STEP_SUMMARY
+
+          echo"## Frontend Coverage Report" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat full_output.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
           
-          # echo "report<<EOF" >> $GITHUB_OUTPUT
-          # cat full_output.txt >> 
-          # echo "EOF" >> $GITHUB_OUTPUT
+          echo "report<<EOF" >> $GITHUB_OUTPUT
+          cat full_output.txt >> 
+          echo "EOF" >> $GITHUB_OUTPUT
 
 
       # - name: Publish Frontend Test Results
       #   uses: dorny/test-reporter@v1
-      #   if: always()
+      #   if:always()
       #   with: 
       #     name: Front end unit test report
       #     path: bugtracker-frontend/test-results.xml
@@ -127,7 +128,7 @@ jobs:
            ```
 
 
-  run-api-and-e2e-tests:
+  api-e2e-perf-tests:
     needs: [frontend-unit-tests, backend-unit-tests] 
     runs-on: ubuntu latest
 
@@ -155,6 +156,17 @@ jobs:
           npm ci
           npx playwright install
           npx playwright test
+          
+      - name: Run K6
+        uses: grafana/setup-k6-action@v1
+
+      - name: Run perf tests
+        uses: grafana/run-k6-action@v1
+        with: 
+          path: ./tests-perf/script.js
+          flags: --out json=summary.json
+
+
 
       - name: Shut down application
         run: docker compose down
@@ -192,7 +204,7 @@ jobs:
           retention-days: 30
 
 
-      - name: Publish Playwright Test report
+      - name: Publish API-Playwright Test report
         if: always()
         uses: dorny/test-reporter@v1
         with: 
